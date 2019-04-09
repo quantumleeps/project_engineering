@@ -20,7 +20,7 @@ class Category(models.Model):
     name = models.CharField(max_length=25)
 
     def __str__(self):
-        return self.name
+        return str(self.code) + ' - ' + self.name
 
 class SubCategory(models.Model):
     class Meta:
@@ -31,7 +31,7 @@ class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,)
 
     def __str__(self):
-        return self.name
+        return str(self.code) + ' - ' + self.name
 
 class Equipment(models.Model):
     class Meta:
