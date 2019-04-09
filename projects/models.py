@@ -13,6 +13,7 @@ class Project(models.Model):
 
 class Category(models.Model):
     class Meta:
+        ordering = ('code',)
         verbose_name_plural = "categories"
 
     code = models.PositiveIntegerField(validators=[MaxValueValidator(99)], unique=True)
@@ -23,6 +24,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     class Meta:
+        ordering = ('category__code', 'code')
         verbose_name_plural = "sub categories"
     name = models.CharField(max_length=25)
     code = models.IntegerField()
@@ -33,6 +35,7 @@ class SubCategory(models.Model):
 
 class Equipment(models.Model):
     class Meta:
+        ordering = ('code',)
         verbose_name_plural = "equipment"
     # code = models.CharField(max_length=2)
     description = models.CharField(max_length=200)
@@ -68,6 +71,8 @@ class PlantSystem(models.Model):
         return self.name
 
 class Size(models.Model):
+    class Meta:
+        ordering = ('code_string',)
     display_string = models.CharField(max_length=50)
     code_string = models.CharField(max_length=10)
 
@@ -76,6 +81,7 @@ class Size(models.Model):
 
 class SpecifiedEquipment(models.Model):
     class Meta:
+        ordering = ('code',)
         verbose_name_plural = "specified equipment"
 
     name = models.CharField(max_length=200)
@@ -113,6 +119,7 @@ class SpecifiedEquipment(models.Model):
 
 class TaggedEquipment(models.Model):
     class Meta:
+        ordering = ('code',)
         verbose_name_plural = "tagged equipment"
 
     name = models.CharField(max_length=40)
